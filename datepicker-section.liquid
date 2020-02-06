@@ -1,0 +1,108 @@
+<div id="powrIframeLoader"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"><div class="designer_dresses">
+    <div class="designer_dresses_bar">
+		<form method="get" action="/apps/bookthatapp/search/#/all">
+<!--           <div class="filter-caption"></div> -->
+          <!--
+          <div class="form-group">
+            <label class="control-label">Title</label>
+            <input type="text" class="form-control" name="query" value=""></input>
+          </div>
+          -->
+          <div class="form-group">
+            <div class="home-banner__col">
+              <div class="home-banner__text">
+                <h1><span class="home-banner__text-line">HIRE DESIGNER DRESSES FOR ANY OCCASION</span></h1>
+                <h2 class="home-banner__tag-line"><span class="home-banner__text-line">RENT THOUSANDS OF DESIGNER DRESSES, GOWNS, PLAYSUITS, AND JUMPSUITS FOR A FRACTION OF THE RETAIL PRICE.</span></h2>
+                <div class="js-landing-page-date-picker landing-page-calendar row">
+                  <div class="home-banner-min">
+                    <div type="text" contenteditable="true" id="daterange" class="form-control" name="daterange" placeholder="Pick your delivery date"></div>
+                    <input type="hidden" class="form-control" idname="start" value="">
+                  </div>
+                  <div class="home-banner-bar">
+                    <button type="submit" class="btn btn-primary btn-default">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </form>
+    </div>
+  </div><script src="//cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script><!-- <script src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script> --><script src="//cdn.shopify.com/s/files/1/0160/5258/4548/t/25/assets/daterangepicker.js?14071" type="text/javascript"></script><script>
+  $(function() {
+      initDaterangePicker();
+      initSelectBoxes();
+      initClearButton();
+  });
+
+  function initClearButton() {
+    $('.clear-btn').click(function(event){
+      $('select').each(function(){
+        $(this).val('');
+      });
+       setDatetangeValues(null, null);
+       setDaterangeText(null, null);
+       $('input[name="query"]').val('');
+    })
+  }
+
+  function initSelectBoxes() {
+    $('select').each(function(){
+      var val = $(this).attr('data-selected');
+      if (val != undefined) {
+        $(this).val(val);
+      }
+    });
+  }
+
+  function setDaterangeText(start, finish) {
+    if (start != null && finish != null) {
+      $('#daterange').html(start.format('MM/DD/YYYY') + ' - ' + finish.format('MM/DD/YYYY'));
+    } else {
+      $('#daterange').html('');
+    }
+  }
+
+  function setDatetangeValues(start, finish) {
+    if (start != null && finish != null) {
+      start = start.format('YYYY-MM-DD');
+      finish = finish.format('YYYY-MM-DD');
+    } else {
+      start = '';
+      finish = '';
+    }
+
+    $('input[name="start"]').val(start);
+    $('input[name="finish"]').val(finish);
+  }
+
+  function initDaterangePicker() {
+    $('#daterange').daterangepicker();
+    var start = '';
+    var finish =  '';
+
+    if (start != '' && finish != '') {
+      start = moment(start);
+      finish = moment(finish);
+
+      $('#daterange').daterangepicker({ startDate:  start, endDate:  finish });
+      setDaterangeText(start, finish);
+    } else {
+      setDaterangeText(null, null);
+    }
+
+    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+      var start = picker.startDate;
+      var finish = picker.endDate;
+      setDatetangeValues(start, finish);
+      setDaterangeText(start, finish);
+    });
+  }
+
+</script><style>
+  #daterange[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555; 
+  }
+</style></div>
